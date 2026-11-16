@@ -1,0 +1,140 @@
+<!-- Folland Gnat by Warty -->
+
+<airplane mass="4138">
+
+  <!-- Approach configuration -->
+  <approach speed="140" aoa="7" fuel="0.3">
+    <control-setting axis="/controls/engines/engine[0]/throttle" value="0.4"/>
+    <control-setting axis="/controls/flight/flaps" value="0.4"/>
+    <control-setting axis="/controls/gear/gear-down" value="1"/>
+    <control-setting axis="/controls/flight/speedbrake" value="0"/>
+  </approach>
+
+  <!-- Cruise configuration.   -->
+  <cruise speed="500" alt="24000" fuel="0.7">
+    <control-setting axis="/controls/engines/engine[0]/throttle" value="1"/>
+    <control-setting axis="/controls/flight/flaps" value="0.0"/>
+    <control-setting axis="/controls/gear/gear-down" value="0"/>
+    <control-setting axis="/controls/flight/speedbrake" value="0"/>
+  </cruise>
+
+  <!-- pilot eyepoint -->
+  <cockpit x="-2.45" y="-0.0" z="0.6"/>
+
+  <!-- Nose cone -->
+  <fuselage ax=   "0"   ay="0" az="-0.15" 
+  			bx=  "-2.0" by="0" bz="0"
+            width="0.45" taper="0.05" midpoint="1.00"/>
+
+  <!-- main body -->
+  <fuselage ax=  "-2.0" ay="0" az="0" 
+            bx= "-8.58" by="0" bz="0.171"
+            width="1.22" taper= "0.3" midpoint= "0.4" />   
+        
+  <wing x="-4.606" y="0.5" z="0.4"
+        taper="0.54"
+        incidence="1.5"
+        twist="0"
+        length="3.906"
+        chord="2.861"
+        sweep="37"
+        dihedral="-3">
+    <stall aoa="25" width="8" peak="1.5"/>
+
+    <flap0 start="0.1" end="0.5" lift="1.5" drag="2.0"/>
+    <flap1 start="0.5" end="0.9" lift="1.3" drag="1.2"/>
+    <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
+    <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
+    <control-input axis="/controls/flight/flaps" control="FLAP0"/>
+    <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
+    <control-output control="FLAP1" prop="/surface-positions/aileron-pos-norm"/>
+    <control-speed control="FLAP0" transition-time="3"/>
+    <control-speed control="FLAP1" transition-time="1.2"/>
+  </wing>
+
+  <hstab x="-8.14" y="0.30" z="0.05"
+         taper="0.55" 
+         length="1.485"
+         chord="1.239"
+         sweep="41"
+         dihedral="0.0">
+    <stall aoa="13.5" width="6" peak="1.5"/>                                   
+    <flap0 start="0.00" end="1.0" lift="2.5" drag="0.7"/>                     
+    <control-input axis="/controls/flight/elevator" control="FLAP0"/>
+    <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
+    <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
+    <control-speed control="FLAP0" transition-time="1.0"/>
+   </hstab>
+  
+    <vstab x="-7.962" y="0.0" z="0.665"
+         taper="0.42"
+         length="1.883"
+         chord="1.642"
+         sweep="35" >
+    <stall aoa="13.5" width="6" peak="1.5"/>                                   
+    <flap0 start="0.2" end="0.8" lift="1.3" drag="1.1"/>
+    <control-input axis="/controls/flight/rudder" control="FLAP0" invert="true"/>
+    <control-input axis="/controls/flight/rudder-trim" control="FLAP0" invert="true"/>
+    <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
+    <control-speed control="FLAP0" transition-time="1.0"/>
+  </vstab>
+
+  <jet x="-7.1" y="0" z="0.171"
+       mass="835"
+       thrust="5000"
+       n1-idle="25" n1-max="100" n2-idle="30" n2-max="100"
+       exhaust-speed="3800"
+       rotation="0">
+    <actionpt x="-8.85" y="0" z="0.171"/>
+    <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
+  </jet>
+
+  <!-- Landing gear -->
+  <!-- nose -->
+  <gear x="-2.733" y="0" z="-1.1"
+        retract-time="1"
+        compression="0.7"
+        spring="1.1"
+        damp="1.4">
+    <control-input axis="/controls/flight/rudder" control="STEER" square="false"/>
+    <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
+    <control-speed control="EXTEND" transition-time="3"/>
+  </gear>
+
+  <!-- main gear is cheat/trainer wheels :o) -->
+  <!-- port -->
+  <gear x="-5.2" y="1.5" z="-1.1"
+        retract-time="1"
+        compression="0.8"
+        spring="0.85"
+        damp="2">
+    <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
+    <control-input axis="/controls/gear/brake-parking" control="BRAKE" />
+    <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
+    <control-speed control="EXTEND" transition-time="4"/>
+    <control-speed control="BRAKE" transition-time="1"/>
+  </gear>
+
+  <!-- stbd -->
+  <gear x="-5.5" y="-1.5" z="-1.1"
+        retract-time="1"
+        compression="0.8"
+        spring="0.85"
+        damp="2">
+    <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
+    <control-input axis="/controls/gear/brake-parking" control="BRAKE" />
+    <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
+    <control-speed control="EXTEND" transition-time="5"/>
+    <control-speed control="BRAKE" transition-time="1"/>
+  </gear>
+
+  <!-- Fuel -->
+  <tank x="-5.2" y="0.0" z="0.1" jet="true" capacity="1457"/>
+  
+  <ballast x="-2.0" y="0" z="-0.1" mass="1000" />
+
+
+</airplane>

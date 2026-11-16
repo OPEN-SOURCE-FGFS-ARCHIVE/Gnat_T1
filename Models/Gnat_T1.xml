@@ -1,0 +1,530 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+  <path>Gnat_T1_fuselage.ac</path>
+  
+  <nasal>
+    <load>
+      var livery_update = aircraft.livery_update.new("Aircraft/Gnat_T1/Models/liveries");
+      var self = cmdarg();
+    </load>
+    <unload>
+      livery_update.stop();
+    </unload>
+  </nasal>
+
+  <!-- fuselage -->
+  <animation>
+    <type>material</type>
+    <object-name>Gnat_fuselage_T1</object-name>
+    <property-base>sim/model/livery</property-base>
+    <texture-prop>texture-fuselage</texture-prop>
+    <texture>Gnat_fuselage_T1.png</texture>
+  </animation>
+
+  <!-- wings -->
+  <animation>
+    <type>material</type>
+    <object-name>wings</object-name>
+    <property-base>sim/model/livery</property-base>
+    <texture-prop>texture-wings</texture-prop>
+    <texture>Gnat_fuselage_T1.png</texture>
+  </animation>
+
+  <!-- ==================================================================== Animations -->
+  
+  <animation><!-- canopy -->
+    <type>rotate</type>
+    <object-name>canopy</object-name>
+    <object-name>canopyMetalCentral</object-name>
+    <property>instrumentation/doors/crew/position-norm</property>
+    <factor>40</factor><axis><object-name>rotationCanopy</object-name></axis>
+  </animation>
+  
+  <animation>
+    <type>rotate</type>
+    <object-name>rudder</object-name>
+    <property>surface-positions/rudder-pos-norm</property>
+    <factor>30.0</factor><axis><object-name>rotateRudder</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>aileronPort</object-name>
+    <property>surface-positions/aileron-pos-norm</property>
+    <factor>20</factor><axis><object-name>rotateAileronPort</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>aileronStbd</object-name>
+    <property>surface-positions/aileron-pos-norm</property>
+    <factor>20</factor><axis><object-name>rotateAileronStbd</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>hstab</object-name>
+    <object-name>elevatorPORT</object-name>
+    <object-name>elevatorSTBD</object-name>
+    <property>surface-positions/elevator-pos-norm</property>
+    <factor>-6</factor><axis><object-name>rotatePitch</object-name></axis>
+  </animation>
+
+<!-- also need to incorporate rotateTrim ???-->
+  <animation>
+    <type>rotate</type>
+    <object-name>hstab</object-name>
+    <object-name>elevatorPORT</object-name>
+    <object-name>elevatorSTBD</object-name>
+    <property>surface-positions/elevator-pos-norm</property>
+    <factor>-3</factor><axis><object-name>rotateTrim</object-name></axis>
+  </animation>
+
+
+  <animation>
+    <type>rotate</type>
+    <object-name>flaperonPORT</object-name>
+    <property>surface-positions/flap-pos-norm</property>
+    <factor>22.0</factor><axis><object-name>rotateFlaperonPORT</object-name></axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>flaperonSTBD</object-name>
+    <property>surface-positions/flap-pos-norm</property>
+    <factor>-22.0</factor><axis><object-name>rotateFlaperonSTBD</object-name></axis>
+  </animation>
+
+<!-- Airbrakes are part of the landing gear -->
+ 
+<!-- ============================================================ landing gear FORWARD -->
+   <animation>
+    <type>rotate</type>
+    <object-name>caliperFixedFwdGear</object-name>
+    <object-name>caliper+wheelsFwdGear</object-name>
+    <property>surface-positions/rudder-pos-norm</property>
+    <factor>30.0</factor><axis><object-name>rotateCasterFwdGear</object-name></axis>
+  </animation>
+  
+      <animation>
+        <type>spin</type>
+        <object-name>wheelsFwd</object-name>
+        <property>gear/gear[0]/rollspeed-ms</property>
+        <factor>-10.00</factor>
+		<axis><object-name>rotateWheelsFwd</object-name></axis>
+    </animation>
+    
+  <animation>
+      <type>rotate</type>
+      <object-name>caliper+wheelsFwdGear</object-name>
+      <property>gear/gear/compression-norm</property><!-- for testing -->      
+      <factor>30</factor>
+      <axis><object-name>rotateFwdGearClaw</object-name></axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>pistonFwdGear</object-name>
+    <property>gear/gear/compression-norm</property>
+    <factor>-0.40</factor>
+    <axis><object-name>compressFwdGearPiston</object-name></axis>
+  </animation>
+  
+      <animation>
+      <type>rotate</type>
+      <object-name>crank57backLegFwdGear</object-name>
+      <object-name>jackFwdGear</object-name>
+            <property>gear/gear/position-norm</property>
+      		<interpolation>
+		  <entry><ind>0.00</ind><dep>-150</dep></entry>
+		  <entry><ind>0.02</ind><dep>-145</dep></entry>
+		  <entry><ind>0.50</ind> <dep>-60</dep></entry>
+		  <entry><ind>0.90</ind>   <dep>0</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>-1</dep></entry>
+		</interpolation>
+      <axis><object-name>rotateRearLegFwdGear</object-name></axis>
+  </animation>
+  
+  <animation>
+    <type>rotate</type>
+      <object-name>shockFwdGear</object-name>
+      <object-name>bracketUpperFwdGear</object-name>
+      <object-name>bracketLowerFwdGear</object-name>
+      <object-name>yPieceFwdGear</object-name>
+      <object-name>rotateCrankFwdGear</object-name>
+      <object-name>caliper+wheelsFwdGear</object-name>
+      <object-name>pistonFwdGear</object-name>
+      <object-name>caliperFixedFwdGear</object-name>
+	  <property>gear/gear/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>106</dep></entry>
+		  <entry><ind>0.02</ind> <dep>95</dep></entry>
+		  <entry><ind>0.50</ind> <dep>53</dep></entry>
+		  <entry><ind>0.90</ind>  <dep>0</dep></entry>
+		  <entry><ind>1.00</ind><dep>-10</dep></entry>
+		</interpolation>
+		<axis><object-name>retractGearFwd</object-name></axis>
+	  </animation>
+  
+  
+ <!-- covers FwdGear--> 
+   <animation>
+    <type>rotate</type>
+    <object-name>coverFwdGearFrontINT</object-name>
+    <object-name>coverFwdGearFrontEXT</object-name>
+    <property>gear/gear/position-norm</property>
+    <factor>-120.0</factor><axis><object-name>rotateFwdGearCoverFront</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>coverFwdGearRearINT</object-name>
+    <object-name>coverFwdGearRearEXT</object-name>
+    <property>gear/gear/position-norm</property>
+    <factor>-105.0</factor><axis><object-name>rotateFwdGearCoverRear</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>coverFwdGearRearINT</object-name>
+    <object-name>coverFwdGearRearEXT</object-name>
+    <property>gear/gear/position-norm</property>
+    <factor>-16.0</factor><axis><object-name>spinFwdGearCoverRear</object-name></axis>
+  </animation>
+  
+
+  
+ <!-- ============================================================== landing gear PORT -->
+ 
+<!-- covers PortGear--> 
+   <animation>
+    <type>rotate</type>
+    <object-name>coverPortGearFwdINT</object-name>
+    <object-name>coverPortGearFwdEXT</object-name>
+    <object-name>animationPortGearRear</object-name>
+    <property>gear/gear[1]/position-norm</property>
+    <factor>-115.0</factor>
+    <axis><object-name>rotatePortGearCoverFwd</object-name></axis>
+  </animation>
+
+   <animation>
+    <type>rotate</type>
+    <object-name>coverPortGearMidINT</object-name>
+    <object-name>coverPortGearMidEXT</object-name>
+    <object-name>coverPortGearRearINT</object-name>
+    <object-name>coverPortGearRearEXT</object-name>
+    <property>gear/gear[1]/position-norm</property>
+    <factor>-13.0</factor>
+    <axis><object-name>rotatePortGearCoversRear</object-name></axis>
+  </animation>
+   <animation>
+    <type>translate</type>
+    <object-name>coverPortGearMidINT</object-name>
+    <object-name>coverPortGearMidEXT</object-name>
+    <object-name>coverPortGearRearINT</object-name>
+    <object-name>coverPortGearRearEXT</object-name>
+    <property>gear/gear[1]/position-norm</property>
+    <factor>1.0</factor>
+    <axis><object-name>translatePortGearCoversRear</object-name></axis>
+  </animation>
+
+<!-- undercarriage PortGear--> 
+   <animation>
+    <type>rotate</type>
+    <object-name>shockPortGear</object-name>
+    <object-name>bracketUpperPortGear</object-name>
+    <object-name>bracketLowerPortGear</object-name>
+    <object-name>yPiecePortGear</object-name>
+    <object-name>spherePortGear</object-name>
+    <object-name>caliperFixedPortGear</object-name>
+    <object-name>caliperFixedPortGear</object-name>
+    <object-name>bracketPortGear</object-name>
+    <object-name>animationJackCrankPortGear</object-name>
+    <object-name>animationCaliperPortGear</object-name>
+    <object-name>compressPistonPortGear</object-name>
+   <property>gear/gear[1]/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>110</dep></entry>
+		  <entry><ind>0.50</ind> <dep>55</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>0</dep></entry>
+		</interpolation>
+    <axis><object-name>retractPortGear</object-name></axis>
+  </animation>
+  
+    <animation>
+    <type>rotate</type>
+    <object-name>jackPortGear</object-name>
+    <object-name>crankPortGear</object-name>
+   <property>gear/gear[1]/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>-145</dep></entry>
+		  <entry><ind>0.016</ind><dep>-140</dep></entry>
+		  <entry><ind>0.125</ind><dep>-130</dep></entry>
+		  <entry><ind>0.25</ind><dep>-114</dep></entry>
+		  <entry><ind>0.50</ind> <dep>-77</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>0</dep></entry>
+		</interpolation>
+    <axis><object-name>rotateJackCrankPortGear</object-name></axis>
+  </animation>
+   
+    <animation>
+    <type>rotate</type>
+    <object-name>wheelPortGear</object-name>
+   <property>gear/gear[1]/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>0</dep></entry>
+		  <entry><ind>0.25</ind><dep>20</dep></entry>
+		  <entry><ind>0.50</ind> <dep>10</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>0</dep></entry>
+		</interpolation>
+    <axis><object-name>fiddlePortGear</object-name></axis>
+  </animation>
+
+
+    <animation>
+      <type>rotate</type>
+      <object-name>caliperMovingPortGear</object-name>
+      <object-name>wheelPortGear</object-name>      
+   <property>gear/gear[1]/compression-norm</property>
+     <factor>20</factor>
+      <axis><object-name>rotateCaliperPortGear</object-name></axis>
+  </animation>
+  
+    <animation>
+    <type>translate</type>
+      <object-name>boltPortGear</object-name>
+       <object-name>pistonPortGear</object-name>
+   <property>gear/gear[1]/compression-norm</property>
+    <factor>-0.60</factor>
+    <axis><object-name>translatePistonPortGear</object-name></axis>
+  </animation>
+  
+     <animation>
+        <type>spin</type>
+        <object-name>wheelPortGear</object-name>
+        <property>gear/gear[1]/rollspeed-ms</property>
+        <factor>-10.00</factor>
+		<axis><object-name>rotateTyrePortGear</object-name></axis>
+    </animation>
+    
+  
+
+<!-- =============================================================== landing gear STBD -->
+
+<!-- covers StbdGear--> 
+   <animation>
+    <type>rotate</type>
+    <object-name>coverStbdGearFwdINT</object-name>
+    <object-name>coverStbdGearFwdEXT</object-name>
+    <object-name>animationStbdGearRear</object-name>
+    <property>gear/gear[2]/position-norm</property>
+    <factor>-115.0</factor>
+    <axis><object-name>rotateStbdGearCoverFwd</object-name></axis>
+  </animation>
+
+   <animation>
+    <type>rotate</type>
+    <object-name>coverStbdGearMidINT</object-name>
+    <object-name>coverStbdGearMidEXT</object-name>
+    <object-name>coverStbdGearRearINT</object-name>
+    <object-name>coverStbdGearRearEXT</object-name>
+    <property>gear/gear[2]/position-norm</property>
+    <factor>-13.0</factor>
+    <axis><object-name>rotateStbdGearCoversRear</object-name></axis>
+  </animation>
+   <animation>
+    <type>translate</type>
+    <object-name>coverStbdGearMidINT</object-name>
+    <object-name>coverStbdGearMidEXT</object-name>
+    <object-name>coverStbdGearRearINT</object-name>
+    <object-name>coverStbdGearRearEXT</object-name>
+    <property>gear/gear[2]/position-norm</property>
+    <factor>1.0</factor>
+    <axis><object-name>translateStbdGearCoversRear</object-name></axis>
+  </animation>
+
+<!-- undercarriage StbdGear--> 
+   <animation>
+    <type>rotate</type>
+    <object-name>shockStbdGear</object-name>
+    <object-name>bracketUpperStbdGear</object-name>
+    <object-name>bracketLowerStbdGear</object-name>
+    <object-name>yPieceStbdGear</object-name>
+    <object-name>sphereStbdGear</object-name>
+    <object-name>caliperFixedStbdGear</object-name>
+    <object-name>caliperFixedStbdGear</object-name>
+    <object-name>bracketStbdGear</object-name>
+    <object-name>animationJackCrankStbdGear</object-name>
+    <object-name>animationCaliperStbdGear</object-name>
+    <object-name>compressPistonStbdGear</object-name>
+   <property>gear/gear[2]/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>110</dep></entry>
+		  <entry><ind>0.50</ind> <dep>55</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>0</dep></entry>
+		</interpolation>
+    <axis><object-name>retractStbdGear</object-name></axis>
+  </animation>
+  
+    <animation>
+    <type>rotate</type>
+    <object-name>jackStbdGear</object-name>
+    <object-name>crankStbdGear</object-name>
+   <property>gear/gear[2]/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>-145</dep></entry>
+		  <entry><ind>0.016</ind><dep>-140</dep></entry>
+		  <entry><ind>0.125</ind><dep>-130</dep></entry>
+		  <entry><ind>0.25</ind><dep>-114</dep></entry>
+		  <entry><ind>0.50</ind> <dep>-77</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>0</dep></entry>
+		</interpolation>
+    <axis><object-name>rotateJackCrankStbdGear</object-name></axis>
+  </animation>
+   
+    <animation>
+    <type>rotate</type>
+    <object-name>wheelStbdGear</object-name>
+   <property>gear/gear[2]/position-norm</property>
+		<interpolation>
+		  <entry><ind>0.00</ind><dep>0</dep></entry>
+		  <entry><ind>0.25</ind><dep>-20</dep></entry>
+		  <entry><ind>0.50</ind> <dep>-10</dep></entry>
+		  <entry><ind>1.00</ind>  <dep>0</dep></entry>
+		</interpolation>
+    <axis><object-name>fiddleStbdGear</object-name></axis>
+  </animation>
+
+
+    
+    <animation>
+      <type>rotate</type>
+      <object-name>caliperMovingStbdGear</object-name>
+      <object-name>wheelStbdGear</object-name>      
+   <property>gear/gear[2]/compression-norm</property>
+     <factor>20</factor>
+      <axis><object-name>rotateCaliperStbdGear</object-name></axis>
+  </animation>
+  
+    <animation>
+    <type>translate</type>
+      <object-name>boltStbdGear</object-name>
+       <object-name>pistonStbdGear</object-name>
+   <property>gear/gear[2]/compression-norm</property>
+    <factor>-0.60</factor>
+    <axis><object-name>translatePistonStbdGear</object-name></axis>
+  </animation>
+  
+     <animation>
+        <type>spin</type>
+        <object-name>wheelStbdGear</object-name>
+        <property>gear/gear[2]/rollspeed-ms</property>
+        <factor>-10.00</factor>
+		<axis><object-name>rotateTyreStbdGear</object-name></axis>
+    </animation>
+  
+  
+  
+
+  <!-- cockpit -->
+  <model>
+    <path>Aircraft/Gnat_T1/Models/Interior/Gnat_cockpit_INN.xml</path>
+  </model>
+  <!-- cockpit instrument glass-->
+  <model>
+    <path>Aircraft/Gnat_T1/Models/Gnat_T1_instrumentGlass</path>
+  </model>
+  
+  
+  <!-- pilots -->
+  <model>
+    <name>pilot1</name>
+    <path>Aircraft/Gnat_T1/Models/GnatPilot.ac</path>
+    <offsets>
+      <x-m>-0.3</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.04</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>pilot2</name>
+    <path>Aircraft/Gnat_T1/Models/GnatPilot.ac</path>
+    <offsets>
+      <x-m>0.9</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.12</z-m>
+    </offsets>
+  </model>
+
+  <!-- seats -->
+  <model>
+    <path>Aircraft/Gnat_T1/Models/GnatSeat.ac</path>
+    <offsets>
+      <x-m>-0.3</x-m>
+      <y-m>0.0</y-m>
+      <z-m>-0.04</z-m>
+    </offsets>
+  </model>
+  <model>
+    <path>Aircraft/Gnat_T1/Models/GnatSeat.ac</path>
+    <offsets>
+      <x-m>0.9</x-m>
+      <y-m>0</y-m>
+      <z-m>0.12</z-m>
+    </offsets>
+  </model>
+
+
+
+  <!-- hide the pilots on internal view -->
+  <animation>
+    <type>select</type>
+    <object-name>pilot1</object-name>
+    <object-name>pilot2</object-name>
+    <condition>
+      <not>
+        <property>sim/current-view/internal</property>
+      </not>
+    </condition>
+  </animation>
+
+   <!-- Display Smoke -->
+  <model>
+    <path>Aircraft/Gnat_T1/Models/Effects/Smoke/smokeB.xml</path>
+    <condition>
+      <not>
+        <property>sim/crashed</property>
+      </not>
+    </condition>
+    <offsets>
+      <x-m>9.1</x-m>
+      <y-m>0</y-m>
+      <z-m>0.2</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/Gnat_T1/Models/Effects/Smoke/smokeW.xml</path>
+    <condition>
+      <not>
+        <property>sim/crashed</property>
+      </not>
+    </condition>
+    <offsets>
+      <x-m>9.1</x-m>
+      <y-m>0</y-m>
+      <z-m>0.2</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/Gnat_T1/Models/Effects/Smoke/smokeR.xml</path>
+    <condition>
+      <not>
+        <property>sim/crashed</property>
+      </not>
+    </condition>
+    <offsets>
+      <x-m>9.1</x-m>
+      <y-m>0</y-m>
+      <z-m>0.2</z-m>
+    </offsets>
+  </model> 
+
+</PropertyList>

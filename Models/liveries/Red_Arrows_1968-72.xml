@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <sim>
+    <model>
+      <!-- 0: fighter , 1: trainer -->
+      <type>
+        <trainer>0</trainer>
+      </type>
+      <livery>
+        <name type="string">Red_Arrows_1968-72</name>
+        <texture-fuselage>liveries/Red_Arrows_1968-72/Gnat_fuselage_T1.png</texture-fuselage>
+        <specular>
+          <red>0.3</red>
+          <green>0.3</green>
+          <blue>0.3</blue>
+        </specular>
+        <emission>
+          <red>0.2</red>
+          <green>0.2</green>
+          <blue>0.2</blue>
+        </emission>
+      </livery>
+    </model>
+  </sim>
+</PropertyList>

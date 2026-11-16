@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+
+	<default>
+
+		<menu n="10">
+			<label>Gnat</label>
+			<enabled type="bool">true</enabled>
+			
+			<item>
+				<name>Fuel-and-payload</name>
+				<binding>
+					<command>nasal</command>
+					<script>gui.showWeightDialog()</script>
+				</binding>
+			</item>
+			<item>
+				<label>Select Livery</label>
+				<binding>
+					<command>nasal</command>
+					<script>aircraft.livery.dialog.toggle()</script>
+				</binding>
+			</item>
+			<item>
+				<label>Toggle Canopy</label>
+				<binding>
+					<command>nasal</command>
+					<script>doors.doorsystem.crewexport();</script>
+				</binding>
+			</item>
+			<item>
+				<label>Taxi</label>
+				<binding>
+					<command>nasal</command>
+					<script>			
+						setprop("/controls/engines/engine[0]/throttle", 0.1);
+						setprop("/autopilot/locks/speed", "");
+						setprop("/controls/gear/brake-parking", 0.0);
+						setprop("/afcs/flight-mode", "Taxi");
+					</script>
+				</binding>
+			</item>
+			<item>
+				<label>Take off</label>
+				<binding>
+					<command>nasal</command>
+					<script>			
+						setprop("/autopilot/settings/target-speed-kt", 200);
+						setprop("/autopilot/locks/speed", "speed-with-throttle");
+						setprop("/autopilot/locks/altitude", "");
+						setprop("/autopilot/locks/heading", "");
+						setprop("/controls/flight/flaps", 0.33);
+						setprop("/controls/gear/brake-parking", 0);
+						setprop("/afcs/flight-mode", "Take off");
+						if(getprop("instrumentation/doors/crew/position-norm") == 1) {
+							interpolate("instrumentation/doors/crew/position-norm", 0, 5);
+						}					
+					</script>
+				</binding>
+			</item>
+			<item>
+				<label>Landing</label>
+				<binding>
+					<command>nasal</command>
+					<script>
+						if(getprop("/position/altitude-agl-ft") > 10){		
+							setprop("/controls/flight/flaps", 0.60);
+							setprop("/autopilot/settings/target-speed-kt", 150);
+							setprop("/autopilot/locks/speed", "speed-with-throttle");
+							setprop("/autopilot/locks/altitude", "");
+							setprop("/autopilot/settings/heading-bug-deg",  getprop("/orientation/heading-magnetic-deg"));
+							setprop("/autopilot/settings/true-heading-deg", getprop("/orientation/heading-deg"));
+							setprop("/autopilot/locks/heading", "");
+							setprop("/controls/gear/gear-down", 1);
+							setprop("/sim/current-view/field-of-view", 90.0); # Zoom in (108 deg is default)			
+							setprop("/controls/gear/brake-parking", 1);
+							setprop("/afcs/flight-mode", "Landing");
+						}  	
+						else{
+							setprop("/controls/engines/engine[0]/throttle", 0.05);
+							setprop("/autopilot/locks/speed", "");
+							setprop("/afcs/flight-mode", "Taxi");
+						}
+					</script>
+				</binding>
+			</item>
+			<item>
+				<label>Park up</label>
+				<binding>
+					<command>nasal</command>
+					<script>			
+						setprop("/controls/engines/engine[0]/throttle", 0.0);
+						setprop("/autopilot/locks/speed", "");
+						setprop("/controls/gear/brake-parking", 1.0);
+						if(getprop("instrumentation/doors/crew/position-norm") == 0) {
+							interpolate("instrumentation/doors/crew/position-norm", 1, 5);
+						}
+						setprop("/afcs/flight-mode", "--none--");
+					</script>
+				</binding>
+			</item>			
+			
+
+
+		</menu>
+
+	</default>
+
+</PropertyList>
+

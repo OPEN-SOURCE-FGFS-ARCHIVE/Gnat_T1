@@ -1,0 +1,630 @@
+<PropertyList>
+
+  <path>Gnat_cockpit_INN.ac</path>
+  
+  	<!--  basic instrument lighting -->
+	
+  <animation>
+    <type>material</type>
+    <object-name>Lit_Instruments</object-name>
+    <emission>
+      <red>   0.5 </red>
+      <green> 0.4 </green>
+      <blue>  0.3 </blue>
+      <factor-prop>/controls/lighting/instruments-norm</factor-prop>
+    </emission>
+  </animation>
+      
+   <animation>
+    <type>material</type>
+    <object-name>Lit_Panels</object-name>
+    <emission>
+      <red>   0.5 </red>
+      <green> 0.3 </green>
+      <blue>  0.2 </blue>
+      <factor-prop>/controls/lighting/panel-norm</factor-prop>
+    </emission>
+  </animation>
+         
+
+<!-- ==================================================================== ASI  (Pilot) --> 
+  <animation><type>rotate</type><object-name>IAS_tens</object-name>
+    <property>/velocities/equivalent-kt</property>
+	<factor>3.6</factor>
+    <axis><object-name>rotationIAS</object-name></axis>
+  </animation>
+  <animation><type>rotate</type><object-name>IAS_hundreds</object-name>
+    <property>/velocities/equivalent-kt</property>
+	<factor>0.36</factor>
+    <axis><object-name>rotationIAS</object-name></axis>
+  </animation>
+    
+<!-- ==================================================================== ALT  (Pilot) --> 
+   <animation><type>rotate</type><object-name>ALT_hundreds</object-name>
+    <property>/position/altitude-ft</property>
+	<factor>0.36</factor>
+    <axis><object-name>rotationAlt</object-name></axis>
+  </animation> 
+  <animation><type>rotate</type><object-name>ALT_thousands</object-name>
+    <property>/position/altitude-ft</property>
+	<factor>0.036</factor>
+    <axis><object-name>rotationAlt</object-name></axis>
+  </animation> 
+  <animation><type>rotate</type><object-name>ALT_10k</object-name>
+    <property>/position/altitude-ft</property>
+	<factor>0.0036</factor>
+    <axis><object-name>rotationAlt</object-name></axis>
+  </animation> 
+   
+<!-- ==================================================================== MACH (Pilot) --> 
+  <animation><type>rotate</type><object-name>MACH_decimals</object-name>
+    <property>/velocities/mach</property>
+	<factor>300</factor>
+    <axis><object-name>rotationMACH</object-name></axis>
+  </animation> 
+  <animation><type>rotate</type><object-name>MACH_ones</object-name>
+    <property>/velocities/mach</property>
+	<factor>30</factor>
+    <axis><object-name>rotationMACH</object-name></axis>
+  </animation>    
+   
+ <!-- ==================================================================== RPM (Pilot) -->
+ <!-- 14,000 = 360 deg .. 0.02571 -->
+ <!--Max 100% = 10,000 rpm = 257 rotation   = 2.57-->  
+  <animation><type>rotate</type><object-name>needleRPM</object-name>	
+	<property>/engines/engine[0]/rpm</property>
+	<factor>2.57</factor><axis><object-name>rotationRPM</object-name></axis>
+  </animation>
+  
+ <!-- ==================================================================== JPT (Pilot) -->
+  <!--Max 1400F = 760C. 1,400 = 193 rotation   = 0.138 -->  
+  <animation><type>rotate</type><object-name>needleJPT</object-name>	
+	<property>/engines/engine[0]/egt-degf</property>
+	<factor>0.138</factor><axis><object-name>rotationJPT</object-name></axis>
+  </animation> 
+
+<!-- ==================================================================== Hydr (Pilot) -->
+<!-- 140% = 360 deg but there is no obvious property for this-->  
+  <animation><type>rotate</type><object-name>needleHydrPress</object-name>	
+	<property>/engines/engine[0]/rpm</property>
+	<factor>2.57</factor><axis><object-name>rotationHydrPress</object-name></axis>
+  </animation> 
+   
+  
+<!-- ============================ AI / Attitude Indicator / Artificial Horizon (Pilot) -->  
+  <animation><type>rotate</type>            
+    <object-name>ball_AI</object-name>
+    <object-name>roll-pointer_AI</object-name>
+    <property>/orientation/roll-deg</property>
+    <factor>-1</factor><axis><object-name>rotationRoll_AI</object-name></axis>
+  </animation>    
+  <animation><type>rotate</type>  <object-name>ball_AI</object-name>
+    <property>/orientation/pitch-deg</property>
+    <factor>-1</factor><axis><object-name>rotationPitch_AI</object-name></axis>
+  </animation> 
+  <animation><type>rotate</type>  <object-name>needle.localiser_AI</object-name>
+    <property>/instrumentation/nav[0]/heading-needle-deflection</property>
+    <factor>10</factor><axis><object-name>rotateLocaliser_AI</object-name></axis>
+  </animation> 
+  <animation><type>select</type> <object-name>needle.localiser_AI</object-name>
+    <condition><property>instrumentation/nav/nav-loc</property></condition>
+  </animation>
+  <animation><type>select</type>  <object-name>flag.hdg_AI</object-name>
+    <condition><not><property>instrumentation/nav/nav-loc</property></not></condition>
+  </animation> 
+  <animation><type>rotate</type>  <object-name>needle.glideslope_AI</object-name>
+    <property>/instrumentation/nav[0]/gs-needle-deflection</property>
+    <factor>5</factor><axis><object-name>rotateGS_AI</object-name></axis>>
+  </animation> 
+  <animation><type>select</type> <object-name>needle.glideslope_AI</object-name>
+    <condition><property>instrumentation/nav/has-gs</property></condition>
+  </animation>
+  <animation><type>select</type>  <object-name>flag.gs_AI</object-name>
+    <condition><not><property>instrumentation/nav/has-gs</property></not></condition>
+  </animation> 
+  <animation><type>select</type>                       
+    <object-name>flag.gyro_AI</object-name>
+    <condition><less-than>
+    <property>engines/engine[0]/rpm</property><value>100</value>
+    </less-than></condition>
+  </animation>  
+  
+<!-- ================================================================== HSI - NAV1+ILS -->
+  <animation><type>translate</type>  <object-name>LOC_HSI</object-name>
+    <property>/instrumentation/nav[0]/heading-needle-deflection</property>
+    <factor>-0.1</factor>
+    <axis><object-name>translation_LOC_HSI</object-name></axis>
+  </animation>
+  <animation><type>translate</type>  <object-name>HSI_GS_HSI</object-name>
+    <property>/instrumentation/nav[0]/gs-needle-deflection</property>
+    <factor>0.5</factor>
+    <axis><object-name>translation_GS_HSI</object-name></axis>
+  </animation>
+  <animation><type>rotate</type>
+    <object-name>disk_HSI</object-name>
+	<property>/orientation/heading-deg</property>
+	<factor>-1</factor><axis><object-name>rotationDisk_HSI</object-name></axis>
+  </animation>
+  <animation><type>rotate</type>
+    <object-name>OBS_to_HSI</object-name>
+    <object-name>LOC_HSI</object-name>
+    <object-name>OBS_from_HSI</object-name>
+	<property>/orientation/heading-deg</property>
+	<factor>-1</factor><axis><object-name>rotationDisk_HSI</object-name></axis>
+  </animation>
+  <animation><type>rotate</type>
+    <object-name>OBS_to_HSI</object-name>
+    <object-name>LOC_HSI</object-name>
+    <object-name>OBS_from_HSI</object-name>	
+	<property>/instrumentation/nav[0]/heading-deg</property>
+	<factor>1</factor><axis><object-name>rotationDisk_HSI</object-name></axis>
+  </animation>
+  <animation><type>select</type>  <object-name>LOC_HSI</object-name>
+    <condition><property>instrumentation/nav/nav-loc</property></condition>
+  </animation> 
+  <animation><type>select</type> <object-name>HSI_GS_HSI</object-name>
+    <condition><property>instrumentation/nav/has-gs</property></condition>
+  </animation>  
+   
+  <animation><type>select</type> 
+   <object-name>dist_0_HSI</object-name>
+   <object-name>dist_1_HSI</object-name>
+   <object-name>dist_2_HSI</object-name>
+   <object-name>dist_3_HSI</object-name>
+    <condition><property>instrumentation/nav/data-is-valid</property></condition>
+  </animation> 
+  
+  <animation><type>textranslate</type><object-name>brg_1_HSI</object-name>
+    <property>/instrumentation/nav[0]/heading-deg</property>
+    <factor>0.001</factor><step>100</step><axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  <animation><type>textranslate</type><object-name>brg_2_HSI</object-name>
+    <property>/instrumentation/nav[0]/heading-deg</property>
+    <factor>0.01</factor>  <step>10</step><axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  <animation><type>textranslate</type><object-name>brg_3_HSI</object-name>
+    <property>/instrumentation/nav[0]/heading-deg</property>
+    <factor>0.1</factor>    <step>1</step><axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  
+  <animation><type>textranslate</type><object-name>dist_0_HSI</object-name>
+    <property>/instrumentation/nav/nav-distance</property>
+    <factor>0.00000053996</factor><step>185200</step>  <axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation> 
+  <animation><type>textranslate</type><object-name>dist_1_HSI</object-name>
+    <property>/instrumentation/nav/nav-distance</property>
+    <factor>0.0000053996</factor>  <step>18520</step>  <axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  <animation><type>textranslate</type><object-name>dist_2_HSI</object-name>
+    <property>/instrumentation/nav/nav-distance</property>
+    <factor>0.000053996</factor>    <step>1852</step>  <axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  <animation><type>textranslate</type><object-name>dist_3_HSI</object-name>
+    <property>/instrumentation/nav/nav-distance</property>
+    <factor>0.00053996</factor>      <step>185.2</step><axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation><!-- 1m = 0.00053996 nm  reverse = 1852  --> 
+  
+  
+<!-- ================================================================= G Units (Pilot) -->
+<!-- 1 Unit = 22.5 deg-->  
+  <animation><type>rotate</type><object-name>needleG_units</object-name>	
+	<property>/accelerations/pilot-gdamped</property>
+	<factor>22.5</factor><axis><object-name>rotationG_units</object-name></axis>
+  </animation>  
+  
+<!-- ==================================================================== VSI  (Pilot) -->  
+  <animation><type>rotate</type><object-name>needleVSI</object-name>
+    <property>/velocities/vertical-speed-fpm</property>
+    <interpolation>
+     <entry><ind>  -6000 </ind><dep> -172 </dep></entry>
+     <entry><ind>  -4000 </ind><dep> -138 </dep></entry>
+      <entry><ind> -3000 </ind><dep> -121 </dep></entry>
+      <entry><ind> -2000 </ind><dep>  -98 </dep></entry>
+      <entry><ind> -1500 </ind><dep>  -85 </dep></entry>
+      <entry><ind> -1000 </ind><dep>  -60 </dep></entry>
+      <entry><ind>     0 </ind><dep>    0 </dep></entry>
+      <entry><ind>  1000 </ind><dep>   60 </dep></entry>
+      <entry><ind>  1500 </ind><dep>   85 </dep></entry>
+      <entry><ind>  2000 </ind><dep>   98 </dep></entry>
+      <entry><ind>  3000 </ind><dep>  121 </dep></entry>
+      <entry><ind>  4000 </ind><dep>  138 </dep></entry>
+      <entry><ind>  6000 </ind><dep>  172 </dep></entry>
+    </interpolation>
+    <axis><object-name>rotationVSI</object-name></axis>
+  </animation>
+   
+<!-- ==================================================================== Fuel (Pilot) -->  
+<!-- 1 Unit = 257 deg -->  
+  <animation><type>rotate</type><object-name>needleFuel_pc</object-name>	
+	<property>/consumables/fuel/total-fuel-norm</property>
+	<factor>257</factor><axis><object-name>rotationFuel_pc</object-name></axis>
+  </animation>  
+
+
+<!-- ==================================================================== Trim (Pilot) -->  
+<!-- 16 deg trim = 180 deg needle change = 11.25 per degree
+     but elevator-trim goes from -1 to 1 --> 
+  <animation><type>rotate</type><object-name>needleTrim</object-name>	
+	<property>/controls/flight/elevator-trim</property>
+	<factor>33.75</factor><axis><object-name>rotationTrim</object-name></axis>
+  </animation> 
+
+<!-- =================================================================== Flaps (Pilot) -->  
+  <animation><type>rotate</type><object-name>needleFlaps</object-name>	
+	<property>/surface-positions/flap-pos-norm</property>
+	<factor>135</factor><axis><object-name>rotationFlaps</object-name></axis>
+  </animation> 
+
+<!-- ================================================================== Sby DG (Pilot) -->  
+  <animation><type>rotate</type><object-name>DG_standby_rose</object-name>	
+	<property>/orientation/heading-deg</property>
+	<factor>-1</factor><axis><object-name>rotationDG_standby_rose</object-name></axis>
+  </animation> 
+  
+  
+  
+<!-- ========================================================== Gear Indicator (Pilot) -->  
+ 
+   <animation><type>textranslate</type><object-name>gear0_DN</object-name>
+    <property>/Gnat_T1/gear0_DN</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis>
+  </animation>
+   <animation><type>textranslate</type><object-name>gear0_UP</object-name>
+    <property>/Gnat_T1/gear0_UP</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis><!-- ????????????? -->
+  </animation>
+  
+  
+  <animation><type>textranslate</type><object-name>gear1_DN</object-name>
+    <property>/Gnat_T1/gear1_DN</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis>
+  </animation>
+   <animation><type>textranslate</type><object-name>gear1_UP</object-name>
+    <property>/Gnat_T1/gear1_UP</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis><!-- ????????????? -->
+  </animation>
+
+
+  <animation><type>textranslate</type><object-name>gear2_DN</object-name>
+    <property>/Gnat_T1/gear2_DN</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis>
+  </animation>
+   <animation><type>textranslate</type><object-name>gear2_UP</object-name>
+    <property>/Gnat_T1/gear2_UP</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis><!-- ????????????? -->
+  </animation>
+   
+    <animation><type>textranslate</type><object-name>gearTransit</object-name>
+    <property>/Gnat_T1/gearTransit</property><bias>0.0001</bias>
+    <factor>0.5</factor><step>1</step><axis><x>1</x><y>0</y></axis><!-- ????????????? -->
+  </animation>  
+  
+  
+<!-- ================================================================ Magnetic Compass -->
+  <animation>
+    <type>rotate</type>
+    <object-name>compassBall</object-name>
+    <property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
+    <axis><object-name>rotationHeading</object-name></axis>
+  </animation>
+  
+  <animation>
+    <type>rotate</type>
+    <object-name>compassBall</object-name>
+    <property>/orientation/roll-rate-degps</property>
+    <factor>-0.1</factor>
+    <axis><object-name>rotationRollRate</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>compassBall</object-name>
+    <property>/orientation/pitch-rate-degps</property>
+    <factor>-0.1</factor>
+    <axis><object-name>rotationPitchRate</object-name></axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>compassBall</object-name>
+    <property>/orientation/yaw-rate-degps</property>
+    <factor>0.1</factor>
+    <axis><object-name>rotationYawRate</object-name></axis>
+  </animation>
+    
+ <!-- ============================================================== Throttle  (Pilot) -->  
+  <animation><type>rotate</type>
+    <object-name>barThrottle</object-name>
+    <object-name>handleThrottle</object-name>
+    <property>/controls/engines/engine/throttle</property>
+    <interpolation>
+      <entry><ind>  0.0 </ind><dep> -28 </dep></entry>
+      <entry><ind>  0.5 </ind><dep>   0 </dep></entry>
+       <entry><ind> 1.0 </ind><dep>  22 </dep></entry>     
+    </interpolation>
+    <axis><object-name>rotationThrottle</object-name></axis>
+  </animation>   
+    
+ <!-- =========================================================== Gear Handle  (Pilot) -->  
+  <animation><type>rotate</type>
+    <object-name>gearHandle</object-name>
+    <property>/controls/gear/gear-down</property>
+    <interpolation>
+      <entry><ind>  0.0 </ind><dep>  32 </dep></entry>
+      <entry><ind>  0.5 </ind><dep>   0 </dep></entry>
+       <entry><ind> 1.0 </ind><dep> -32 </dep></entry>     
+    </interpolation>
+    <axis><object-name>rotationThrottle</object-name></axis>
+  </animation>       
+
+
+ <!-- =========================================================== Gear Handle  (Pilot) -->  
+  <animation><type>rotate</type>
+    <object-name>brakeHandle</object-name>
+    <property>/controls/gear/brake-parking</property>
+    <interpolation>
+      <entry><ind> 0.0 </ind><dep>   0 </dep></entry>
+      <entry><ind> 0.8 </ind><dep>  -1 </dep></entry>
+      <entry><ind> 1.0 </ind><dep> -90 </dep></entry>     
+    </interpolation>
+    <axis><object-name>rotateBrakeHandle</object-name></axis>
+  </animation> 
+  
+<!-- ====================================================== Park Brake Handle  (Pilot) -->  
+  
+  <animation>
+    <type>translate</type>
+    <object-name>brakeHandle</object-name>
+    <property>/controls/gear/brake-parking</property>
+    <factor>-1</factor>
+    <axis><object-name>translateBrakeHandle</object-name></axis>
+  </animation>  
+  
+<!-- ============================================================ Smoke Colour (Pilot) -->  
+ <animation>
+  <type>pick</type>
+   <object-name>knobSmokeRed</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <interval-sec>0.2</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+          if (getprop("/Gnat_T1/smoke/red") == 0){
+            setprop("/Gnat_T1/smoke/red", 1);
+            setprop("/Gnat_T1/smoke/white", 0);
+            setprop("/Gnat_T1/smoke/blue", 0);
+          }
+          else{
+            setprop("/Gnat_T1/smoke/red", 0);
+          }
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+   <animation>
+    <type>rotate</type>
+    <object-name>knobSmokeRed</object-name>
+    <property>/Gnat_T1/smoke/red</property>
+    <interpolation>
+      <entry><ind> 0.0 </ind><dep>-22.5 </dep></entry>
+      <entry><ind> 1.0 </ind><dep> 22.5 </dep></entry>     
+    </interpolation>
+    <axis><object-name>rotateSmokeRed</object-name></axis>
+  </animation> 
+
+ <animation>
+  <type>pick</type>
+   <object-name>knobSmokeWhite</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <interval-sec>0.2</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+          if (getprop("/Gnat_T1/smoke/white") == 0){
+            setprop("/Gnat_T1/smoke/red", 0);
+            setprop("/Gnat_T1/smoke/white", 1);
+            setprop("/Gnat_T1/smoke/blue", 0);
+          }
+          else{
+            setprop("/Gnat_T1/smoke/white", 0);
+          }
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+   <animation>
+    <type>rotate</type>
+    <object-name>knobSmokeWhite</object-name>
+    <property>/Gnat_T1/smoke/white</property>
+    <interpolation>
+      <entry><ind> 0.0 </ind><dep>-22.5 </dep></entry>
+      <entry><ind> 1.0 </ind><dep> 22.5 </dep></entry>     
+    </interpolation>
+    <axis><object-name>rotateSmokeWhite</object-name></axis>
+  </animation>
+  
+ <animation>
+  <type>pick</type>
+   <object-name>knobSmokeBlue</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>false</repeatable>
+    <interval-sec>0.2</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+          if (getprop("/Gnat_T1/smoke/blue") == 0){
+            setprop("/Gnat_T1/smoke/red", 0);
+            setprop("/Gnat_T1/smoke/white", 0);
+            setprop("/Gnat_T1/smoke/blue", 1);
+          }
+          else{
+            setprop("/Gnat_T1/smoke/blue", 0);
+          }
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+   <animation>
+    <type>rotate</type>
+    <object-name>knobSmokeBlue</object-name>
+    <property>/Gnat_T1/smoke/blue</property>
+    <interpolation>
+      <entry><ind> 0.0 </ind><dep>-22.5 </dep></entry>
+      <entry><ind> 1.0 </ind><dep> 22.5 </dep></entry>     
+    </interpolation>
+    <axis><object-name>rotateSmokeBlue</object-name></axis>
+  </animation>
+  
+ <!-- ============================================================ Baro adjust (Pilot) -->  
+ 
+   <animation><type>textranslate</type><object-name>hpa.000</object-name>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <factor>0.003386</factor><step>29.53</step>  <axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation> 
+  <animation><type>textranslate</type><object-name>hpa.001</object-name>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <factor>0.03386</factor>  <step>2.953</step>  <axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  <animation><type>textranslate</type><object-name>hpa.002</object-name>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <factor>0.3386</factor>    <step>0.2953</step>  <axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>
+  <animation><type>textranslate</type><object-name>hpa.003</object-name>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <factor>3.3864</factor>      <step>0.02953</step><axis><x>0</x><y>-1</y><z>0</z></axis>
+  </animation>  <!-- 1 inhg = 0.03386 bars  reverse = 29.53  
+				0.003386 * 29.53 = 0.1 (the translation required)
+   				0.03386  * 2.953 = 0.1  
+   				0.3386   * 0.2953 = 0.1
+   				3.3864  * 0.02953 = 0.1000004  --> 
+
+<animation>
+  <type>pick</type>
+   <object-name>baroDown</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.1</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+            setprop("/instrumentation/altimeter/setting-inhg", ( getprop("/instrumentation/altimeter/setting-inhg") - 0.02953));
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+ <animation>
+  <type>pick</type>
+   <object-name>baroUp</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.1</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+            setprop("/instrumentation/altimeter/setting-inhg", ( getprop("/instrumentation/altimeter/setting-inhg") + 0.02953));
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+ <animation>
+    <type>rotate</type>
+    <object-name>Baro_knob</object-name>
+    <property>/instrumentation/altimeter/setting-inhg</property>
+    <factor>300</factor><!-- 9 degrees per click -->
+    <axis><object-name>rotateBaroKnob</object-name></axis>
+  </animation>
+<!-- =============================================== Panel Lights adjust (Pilot) -->  
+<animation>
+  <type>pick</type>
+   <object-name>PBD</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.1</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+            setprop("/controls/lighting/panel-norm", ( getprop("/controls/lighting/panel-norm") - 0.05));
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+ <animation>
+  <type>pick</type>
+   <object-name>PBU</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.1</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+            setprop("/controls/lighting/panel-norm", ( getprop("/controls/lighting/panel-norm") + 0.05));
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+ <animation>
+    <type>rotate</type>
+    <object-name>knobDimmerCockpit</object-name>
+    <property>/controls/lighting/panel-norm</property>
+    <factor>270</factor>
+    <axis><object-name>rotateDimmerCockpit</object-name></axis>
+  </animation>
+  
+ <!-- =============================================== Instruments Lights adjust (Pilot) -->  
+<animation>
+  <type>pick</type>
+   <object-name>IBD</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.1</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+            setprop("/controls/lighting/instruments-norm", ( getprop("/controls/lighting/instruments-norm") - 0.05));
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+ <animation>
+  <type>pick</type>
+   <object-name>IBU</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.1</interval-sec>
+    <binding>
+      <command>nasal</command>
+        <script>
+            setprop("/controls/lighting/instruments-norm", ( getprop("/controls/lighting/instruments-norm") + 0.05));
+        </script>    
+    </binding>
+   </action>
+ </animation> 
+ <animation>
+    <type>rotate</type>
+    <object-name>knobDimmerDials</object-name>
+    <property>/controls/lighting/instruments-norm</property>
+    <factor>270</factor>
+    <axis><object-name>rotateDimmerDials</object-name></axis>
+  </animation>
+   
+
+
+
+
+
+
+
+
+      
+</PropertyList>
+
+

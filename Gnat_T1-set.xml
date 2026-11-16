@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<!-- Folland Gnat T1 -->
+
+<PropertyList>
+  <sim>
+
+    <description>Folland Gnat T1</description>
+    <author>Warty</author>
+    <aircraft-version>0.9</aircraft-version>
+    <status>0.9 BETA</status>
+
+    <rating>
+      <FDM type="int">4</FDM>
+      <systems type="int">3</systems>
+      <cockpit type="int">3</cockpit>
+      <model type="int">3</model>
+    </rating>
+
+    <instrumentation>
+      <path>Aircraft/Gnat_T1/Systems/instrumentation.xml</path>
+    </instrumentation>
+
+    <systems>
+      <electrical>
+        <path>Aircraft/Generic/generic-electrical.xml</path>
+      </electrical>
+      <autopilot>
+        <path>Aircraft/Gnat_T1/systems/autopilot3.xml</path>
+      </autopilot>
+    </systems>
+
+    <model>
+      <path>Aircraft/Gnat_T1/Models/Gnat_T1.xml</path>
+      <type>
+        <!-- 0: fighter , 1: trainer -->
+        <trainer>1</trainer>
+      </type>
+    </model>
+    
+    
+<!-- =========================================================== Start of Warty extras -->
+    <allow-toggle-cockpit>true</allow-toggle-cockpit>
+    <panel>  <!-- ========================================= not available in this repo -->
+	  <path>Aircraft/Gnat_T1/Panels/panel-Gnat.xml</path>
+	  <hide-nonzero-heading-offset>false</hide-nonzero-heading-offset>
+	  <visibility archive="y">false</visibility>
+    </panel>
+
+  <hud>
+	<path n="1">Aircraft/Gnat_T1/Hud/hud_Gnat.xml</path>
+	<visibility n="1">true</visibility>
+	<palette>
+		<color n="0">
+			<alpha type="float">0.85</alpha>
+			<antialiased type="bool">true</antialiased>
+			<!--brightness type="float">0.85</brightness-->
+			<brightness type="float">0.50</brightness>
+			<transparent type="bool">true</transparent>
+			<red type="float">0.38</red>
+			<green type="float">1.0</green>
+			<blue type="float">0.22</blue>
+		</color> 
+		<color n="1"> 
+			<alpha type="float">0.85</alpha>
+			<antialiased type="bool">true</antialiased>
+			<brightness type="float">0.85</brightness>
+			<transparent type="bool">true</transparent>
+			<red type="float">1.0</red>
+			<green type="float">0.2</green>
+			<blue type="float">0.0</blue>
+		</color>	
+		<color n="2">
+			<alpha type="float">0.85</alpha>
+			<antialiased type="bool">true</antialiased>
+			<brightness type="float">0.85</brightness>
+			<transparent type="bool">true</transparent>
+			<red type="float">0.0</red>
+			<green type="float">0.0</green>
+			<blue type="float">0.7</blue>
+		</color>
+	</palette>
+  </hud>	
+<!-- ============================================================= End of Warty extras -->
+
+    <startup>
+      <splash-texture>Aircraft/Gnat_T1/splash.png</splash-texture>
+    </startup>
+
+    <virtual-cockpit archive="y">false</virtual-cockpit>
+
+    <view n="0">
+      <internal archive="y">true</internal>
+      <config>
+        <x-offset-m archive="y">0</x-offset-m>
+        <y-offset-m archive="y">0.6</y-offset-m>
+        <z-offset-m archive="y">2.45</z-offset-m>
+        <pitch-offset-deg>-7</pitch-offset-deg>
+        <default-field-of-view-deg>85</default-field-of-view-deg>
+      </config>
+    </view>
+
+    <current-view>
+      <field-of-view>85.0</field-of-view>
+    </current-view>
+
+
+    <!-- Shift the camera target point back -->
+    <view n="1">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <view n="2">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <view n="3">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <view n="4">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <view n="5">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <view n="6">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <view n="7">
+      <config>
+        <target-z-offset-m archive="y" type="double">6.0</target-z-offset-m>
+        <pitch-offset-deg archive="y">15</pitch-offset-deg>
+        <roll-offset-deg archive="y">1.5</roll-offset-deg>
+      </config>
+    </view>
+
+    <flight-model>yasim</flight-model>
+    <aero>Gnat_T1-yasim</aero>
+    <fuel-fraction>0.5</fuel-fraction>
+    
+    <sound>
+     <path>Aircraft/Gnat_T1/Sounds/sound.xml</path>
+    </sound>
+
+    <engines>
+      <engine n="0">
+        <running>true</running>
+      </engine>
+    </engines>
+
+    <hud>
+      <enable3d>true</enable3d>
+    </hud>
+
+    <help>
+      <title>Gnat - Help</title>
+
+      <text>
+ Taking off:
+  Increase throttle to 100%.
+  Release parking brake.
+  One click of flaps (0.33).
+  Rotate at 120-140kts.
+ Landing:
+  Two clicks of flaps (0.66). 
+  Slow down to around 140kts.
+  Just prior to landing, reduce throttle to zero.
+  Apply the wheel brakes.
+
+ The Gnat menu also has options to automate 
+ various settings and set the AFCS to control things :o)
+
+      </text>
+    </help>
+  
+    <menubar include="Dialogs/menu.xml"/>
+
+  </sim>
+  
+  <controls>
+    <gear>
+      <brake-parking type="double">1.0</brake-parking>
+    </gear>
+        <engines>
+      <engine>
+        <throttle>0</throttle>
+      </engine>
+    </engines>
+  </controls>
+
+  
+    <input>
+    <!-- ===============================Warty Extras START============================ -->
+    <keyboard include="Input/keyboard_Gnat.xml" />
+    <!-- =================================Warty Extras end============================ -->
+  </input>
+
+  <environment>
+    <turbulence>
+      <use-cloud-turbulence>true</use-cloud-turbulence>
+    </turbulence>
+  </environment>
+
+  <consumables>
+    <fuel>
+      <tank n="0">
+        <tank-num type="int">0</tank-num>
+        <level-gal_us archive="y">108</level-gal_us>
+      </tank>
+    </fuel>
+  </consumables>
+
+  <instrumentation>
+    <doors><!--opened at strtup -->
+      <crew>
+        <position-norm type="float">0</position-norm>
+      </crew>
+    </doors>
+  </instrumentation>
+  
+    <Gnat_T1>
+    	<gear0_DN type="int">1</gear0_DN>
+    	<gear0_UP type="int">0</gear0_UP>
+    	
+     	<gear1_DN type="int">1</gear1_DN>
+    	<gear1_UP type="int">0</gear1_UP> 
+    	  	
+     	<gear2_DN type="int">1</gear2_DN>
+    	<gear2_UP type="int">0</gear2_UP> 
+    	  	
+     	<gearTransit type="int">0</gearTransit>  
+     	
+     	<smoke>
+     		<red   type="int">0</red>
+     		<white type="int">0</white>
+     		<blue  type="int">0</blue>
+     		<particlepersec  type="int">50</particlepersec>
+     	</smoke> 	
+    </Gnat_T1>
+    
+
+  <nasal>
+    <Gnat_T1>
+      <file>Aircraft/Gnat_T1/Nasal/light.nas</file>
+      <file>Aircraft/Gnat_T1/Nasal/liveries.nas</file>
+      <file>Aircraft/Gnat_T1/Nasal/Gnat_T1.nas</file>
+    </Gnat_T1>
+
+    <doors>
+      <file>Aircraft/Gnat_T1/Nasal/doors.nas</file>
+    </doors>
+
+    <electrical>
+      <file>Aircraft/Gnat_T1/Nasal/electrical.nas</file>
+    </electrical>
+
+    <enav>
+      <file>Aircraft/Gnat_T1/Nasal/enav.nas</file><!-- TACAN -->
+    </enav>
+
+    <engines>
+      <file>Aircraft/Gnat_T1/Nasal/generic-yasim-engine.nas</file>
+      <script>
+        var engine1 = engines.Jet.new(0, 0, 0.01, 5.21, 3, 5, 1, 6);
+        setlistener("sim/signals/fdm-initialized", func {
+          engine1.init();
+        }, 0, 0);
+      </script>
+    </engines>
+
+
+<!-- =========================================================== Start of Warty extras -->
+	<afcs>       
+		<file>Aircraft/Gnat_T1/Nasal/common.nas</file>
+	    <file>Aircraft/Gnat_T1/Nasal/Gnat_afcs.nas</file>
+	</afcs>
+<!-- ============================================================= End of Warty extras -->
+
+  </nasal>
+
+</PropertyList>
